@@ -2,7 +2,7 @@ import 'package:wanandroid_flutter_re/generated/json/base/json_convert_content.d
 import 'package:wanandroid_flutter_re/entity/app_settings_entity.dart';
 import 'package:flutter/material.dart';
 
-
+import 'package:wanandroid_flutter_re/theme/WanThemes.dart';
 
 
 AppSettingsEntity $AppSettingsEntityFromJson(Map<String, dynamic> json) {

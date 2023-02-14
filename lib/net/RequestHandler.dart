@@ -1,17 +1,27 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter/foundation.dart';
 import 'package:wanandroid_flutter_re/base/net/BaseNetFetchHandler.dart';
+import 'package:wanandroid_flutter_re/net/interceptor/WebCookieManager.dart';
 
 class RequestHandler extends BaseNetFetchHandler {
   final String baseUrl;
-  final CookieManager cookieManager;
+  final Interceptor cookieManager;
 
   RequestHandler({
     required this.baseUrl,
     required this.cookieManager,
   });
 
-  clearAllCookie() => cookieManager.cookieJar.deleteAll();
+  clearAllCookie() {
+    if (kIsWeb) {
+      final realCookieManager = cookieManager as WebWanCookieManager;
+      realCookieManager.clearCookies();
+    } else {
+      final realCookieManager = cookieManager as WebWanCookieManager;
+      realCookieManager.clearCookies();
+    }
+  }
 
   @override
   HttpClientAdapter? setHttpClientAdapter() {

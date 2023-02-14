@@ -2,6 +2,7 @@ import 'package:wanandroid_flutter_re/generated/json/base/json_convert_content.d
 import 'package:wanandroid_flutter_re/entity/article_list_entity.dart';
 import 'package:wanandroid_flutter_re/entity/article_entity.dart';
 
+
 ArticleListEntity $ArticleListEntityFromJson(Map<String, dynamic> json) {
 	final ArticleListEntity articleListEntity = ArticleListEntity();
 	final int? curPage = jsonConvert.convert<int>(json['curPage']);

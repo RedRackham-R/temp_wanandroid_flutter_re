@@ -1,5 +1,7 @@
 import 'package:wanandroid_flutter_re/generated/json/base/json_convert_content.dart';
 import 'package:wanandroid_flutter_re/entity/article_entity.dart';
+import 'package:wanandroid_flutter_re/base/ext/CommonExt.dart';
+
 import 'package:wanandroid_flutter_re/entity/article_tag_entity.dart';
 
 

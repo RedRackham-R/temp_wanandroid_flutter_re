@@ -1,30 +1,32 @@
 import 'dart:async';
-import 'dart:html';
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:wanandroid_flutter_re/generated/json/base/json_convert_content.dart';
 
-class WebCookieManager extends Interceptor {
-  WebCookieManager() : super();
+import 'package:wanandroid_flutter_re/base/ext/CommonExt.dart';
+import 'package:wanandroid_flutter_re/entity/cookie_entity.dart';
+
+import 'package:wanandroid_flutter_re/generated/json/base/json_convert_content.dart';
+import 'package:wanandroid_flutter_re/global/CacheManager.dart';
+import 'package:wanandroid_flutter_re/global/ext/AppExt.dart';
+import 'package:wanandroid_flutter_re/main.dart';
+
+class WebWanCookieManager extends Interceptor {
+  WebWanCookieManager() : super();
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    window.cookieStore?.getAll().then((cookies) {
-      var cookie = _getCookies(cookies);
-      if (cookie.isNotEmpty) {
-        options.headers[HttpHeaders.cookieHeader] = cookie;
-      }
-      handler.next(options);
-    }).catchError((e, stackTrace) {
-      var err = DioError(requestOptions: options, error: e);
-      err.stackTrace = stackTrace;
-      handler.reject(err, true);
-    });
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    await _setCookieFromLocalStore(options, handler);
+    Map<String, dynamic> extra = {};
+    extra["withCredentials"] = true;
+    options.extra = extra;
+    return handler.next(options);
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    _saveCookiesToCookieStore(response)
+  void onResponse(Response response, ResponseInterceptorHandler handler) async {
+    await _saveCookiesToLocal(response)
         .then((_) => handler.next(response))
         .catchError((e, stackTrace) {
       var err = DioError(requestOptions: response.requestOptions, error: e);
@@ -34,9 +36,9 @@ class WebCookieManager extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
     if (err.response != null) {
-      _saveCookiesToCookieStore(err.response!)
+      await _saveCookiesToLocal(err.response!)
           .then((_) => handler.next(err))
           .catchError((e, stackTrace) {
         var _err = DioError(
@@ -51,27 +53,72 @@ class WebCookieManager extends Interceptor {
     }
   }
 
-  Future<void> _saveCookiesToCookieStore(Response response) async {
+  Future<void> _saveCookiesToLocal(Response response) async {
     var cookies = response.headers[HttpHeaders.setCookieHeader];
-
     if (cookies != null) {
-      List<Cookie> cookieList =
+      List<Cookie> respCookies =
           cookies.map((str) => Cookie.fromSetCookieValue(str)).toList();
 
-      for (var element in cookieList) {
-        window.cookieStore?.set(element.name, element.value);
+      String? localCookiesStr = await CacheManager.fetch_web_local_cookie();
+
+      if (localCookiesStr.isNullOrEmpty()) {
+        List<CookieEntity> list = [];
+        for (var element in respCookies) {
+          final entity = CookieEntity();
+          entity.name = element.name;
+          entity.value = element.value;
+          list.add(entity);
+        }
+        await CacheManager.save_web_local_cookie(jsonEncode(list));
+      } else {
+        if (!localCookiesStr.isNullOrEmpty()) {
+          try {
+            List<CookieEntity>? localList =
+                jsonConvert.convertListNotNull<CookieEntity>(
+                    jsonDecode(localCookiesStr!) as List<dynamic>);
+
+            for (var respCookie in respCookies) {
+              var contain = localList!
+                  .where((element) => element.name == respCookie.name);
+              if (contain.isNotEmpty) {
+                for (var containCookie in contain) {
+                  localList.remove(containCookie);
+                }
+              }
+              final entity = CookieEntity();
+              entity.name = respCookie.name;
+              entity.value = respCookie.value;
+              localList.add(entity);
+            }
+          } catch (exception) {
+            await globalAppController.loginOut();
+            extRunWithLogin(onLogin: () {});
+          }
+        }
       }
     }
   }
 
-  String _getCookies(List<dynamic> value) {
-    List<Cookie?>? list = jsonConvert.convertList<Cookie>(value);
-    List<Cookie> cookies = [];
-    list?.forEach((element) {
-      if (element != null) {
-        cookies.add(element);
+  Future<void> _setCookieFromLocalStore(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    String? localCookiesStr = await CacheManager.fetch_web_local_cookie();
+    if (!localCookiesStr.isNullOrEmpty()) {
+      try {
+        List<CookieEntity>? cookies =
+            jsonConvert.convertListNotNull<CookieEntity>(
+                jsonDecode(localCookiesStr!) as List<dynamic>);
+
+        options.headers[HttpHeaders.cookieHeader] = cookies!
+            .map((cookie) => '${cookie.name}=${cookie.value}')
+            .join('; ');
+      } catch (exception) {
+        await globalAppController.loginOut();
+        extRunWithLogin(onLogin: () {});
       }
-    });
-    return cookies.map((cookie) => '${cookie.name}=${cookie.value}').join('; ');
+    }
+  }
+
+  clearCookies() async {
+    CacheManager.save_web_local_cookie("");
   }
 }

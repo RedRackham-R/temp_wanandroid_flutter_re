@@ -11,6 +11,7 @@ import 'package:wanandroid_flutter_re/entity/article_tag_entity.dart';
 import 'package:wanandroid_flutter_re/entity/banner_entity.dart';
 import 'package:wanandroid_flutter_re/entity/coin_list_entity.dart';
 import 'package:wanandroid_flutter_re/entity/collect_web_entity.dart';
+import 'package:wanandroid_flutter_re/entity/cookie_entity.dart';
 import 'package:wanandroid_flutter_re/entity/hot_keywords_entity.dart';
 import 'package:wanandroid_flutter_re/entity/login_entity.dart';
 import 'package:wanandroid_flutter_re/entity/nav_entity.dart';
@@ -34,6 +35,7 @@ class JsonConvert {
 		(CoinListEntity).toString(): CoinListEntity.fromJson,
 		(CoinListDatas).toString(): CoinListDatas.fromJson,
 		(CollectWebEntity).toString(): CollectWebEntity.fromJson,
+		(CookieEntity).toString(): CookieEntity.fromJson,
 		(HotKeywordsEntity).toString(): HotKeywordsEntity.fromJson,
 		(LoginEntity).toString(): LoginEntity.fromJson,
 		(NavEntity).toString(): NavEntity.fromJson,

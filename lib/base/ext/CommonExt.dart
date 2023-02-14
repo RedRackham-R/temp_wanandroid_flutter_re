@@ -50,10 +50,10 @@ extShowToast(
         fontSize: fontSize);
 
 ///拓展日志打印函数
-extLog(
-  String msg,
+extLog({
+  required String msg,
   String? tag,
-) {
+}) {
   if (defaultTargetPlatform == TargetPlatform.iOS ||
       defaultTargetPlatform == TargetPlatform.android) {
     LogUtil.e("$tag $msg");
@@ -65,4 +65,3 @@ extLog(
     print("tag:$tag msg:$msg");
   }
 }
-

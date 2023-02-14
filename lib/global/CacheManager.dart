@@ -30,6 +30,14 @@ class CacheManager {
     _putString("history_keywords", keywords);
   }
 
+  //设置web版本本地缓存cookie
+  static Future<String?> fetch_web_local_cookie() async =>
+      _getString("web_local_cookie");
+
+  static Future save_web_local_cookie(final String cookies) async {
+    _putString("web_local_cookie", cookies);
+  }
+
   static _remove(final String key) async {
     // if (kIsWeb) {
     //   final Storage localStorage = window.localStorage;

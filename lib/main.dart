@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:html';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +58,7 @@ class MyApp extends StatelessWidget {
 _initializeApp() async {
   if (defaultTargetPlatform == TargetPlatform.iOS ||
       defaultTargetPlatform == TargetPlatform.android) {
-    await _initMobilePlatform();
+    await _initDesktopPlatform();
   } else if (defaultTargetPlatform == TargetPlatform.linux ||
       defaultTargetPlatform == TargetPlatform.macOS ||
       defaultTargetPlatform == TargetPlatform.windows) {
@@ -91,13 +90,15 @@ _initOtherPlatform() async {
 
 _initDesktopPlatform() async {
   print("Desktop platform initializing...");
+  extLog(msg: "isWeb $kIsWeb");
 
   ///这里区分是web还是桌面操作系统应用（windows）
   if (kIsWeb) {
     await _initAPIForWeb();
   } else {
-    Directory td = await getTemporaryDirectory();
-    await _initAPIForApp(dir: td.path);
+    await _initAPIForWeb();
+    // Directory td = await getTemporaryDirectory();
+    // await _initAPIForApp(dir: td.path);
   }
 }
 
@@ -120,7 +121,7 @@ _initMobilePlatform() async {
 }
 
 _initAPIForWeb() async {
-  final WebCookieManager cookieManager = WebCookieManager();
+  final WebWanCookieManager cookieManager = WebWanCookieManager();
   requestHandler = RequestHandler(
     baseUrl: WanAPI.BASE_URL,
     cookieManager: cookieManager,
