@@ -2,23 +2,23 @@ import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:wanandroid_flutter_re/base/net/BaseNetFetchHandler.dart';
-import 'package:wanandroid_flutter_re/net/interceptor/WebCookieManager.dart';
+import 'package:wanandroid_flutter_re/net/interceptor/WebCookieInterceptor.dart';
 
 class RequestHandler extends BaseNetFetchHandler {
   final String baseUrl;
-  final Interceptor cookieManager;
+  final Interceptor cookieInterceptor;
 
   RequestHandler({
     required this.baseUrl,
-    required this.cookieManager,
+    required this.cookieInterceptor,
   });
 
   clearAllCookie() {
     if (kIsWeb) {
-      final realCookieManager = cookieManager as WebWanCookieManager;
+      final realCookieManager = cookieInterceptor as WebCookieInterceptor;
       realCookieManager.clearCookies();
     } else {
-      final realCookieManager = cookieManager as WebWanCookieManager;
+      final realCookieManager = cookieInterceptor as WebCookieInterceptor;
       realCookieManager.clearCookies();
     }
   }
@@ -33,7 +33,7 @@ class RequestHandler extends BaseNetFetchHandler {
     return <Interceptor>[
       //添加日志输出拦截器
       LogInterceptor(),
-      cookieManager,
+      cookieInterceptor,
       //添加cookie管理工具
     ];
   }

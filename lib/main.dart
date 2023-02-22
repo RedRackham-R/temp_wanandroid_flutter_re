@@ -14,7 +14,7 @@ import 'package:wanandroid_flutter_re/global/ext/AppExt.dart';
 import 'package:wanandroid_flutter_re/net/RequestHandler.dart';
 import 'package:wanandroid_flutter_re/net/WanAPI.dart';
 import 'package:wanandroid_flutter_re/net/WanService.dart';
-import 'package:wanandroid_flutter_re/net/interceptor/WebCookieManager.dart';
+import 'package:wanandroid_flutter_re/net/interceptor/WebCookieInterceptor.dart';
 import 'package:wanandroid_flutter_re/routes/routes_config.dart';
 
 import 'package:wanandroid_flutter_re/utils/PermissionUtils.dart';
@@ -121,10 +121,10 @@ _initMobilePlatform() async {
 }
 
 _initAPIForWeb() async {
-  final WebWanCookieManager cookieManager = WebWanCookieManager();
+  final WebCookieInterceptor interceptor = WebCookieInterceptor();
   requestHandler = RequestHandler(
     baseUrl: WanAPI.BASE_URL,
-    cookieManager: cookieManager,
+    cookieInterceptor: interceptor,
   );
 }
 
@@ -139,6 +139,6 @@ _initAPIForApp({String dir = ""}) async {
 
   requestHandler = RequestHandler(
     baseUrl: WanAPI.BASE_URL,
-    cookieManager: cookieManager,
+    cookieInterceptor: cookieManager,
   );
 }

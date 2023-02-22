@@ -11,8 +11,8 @@ import 'package:wanandroid_flutter_re/global/CacheManager.dart';
 import 'package:wanandroid_flutter_re/global/ext/AppExt.dart';
 import 'package:wanandroid_flutter_re/main.dart';
 
-class WebWanCookieManager extends Interceptor {
-  WebWanCookieManager() : super();
+class WebCookieInterceptor extends Interceptor {
+  WebCookieInterceptor() : super();
 
   @override
   void onRequest(
@@ -71,29 +71,29 @@ class WebWanCookieManager extends Interceptor {
         }
         await CacheManager.save_web_local_cookie(jsonEncode(list));
       } else {
-        if (!localCookiesStr.isNullOrEmpty()) {
-          try {
-            List<CookieEntity>? localList =
-                jsonConvert.convertListNotNull<CookieEntity>(
-                    jsonDecode(localCookiesStr!) as List<dynamic>);
+        try {
+          List<CookieEntity>? localList =
+              jsonConvert.convertListNotNull<CookieEntity>(
+                  jsonDecode(localCookiesStr!) as List<dynamic>);
 
-            for (var respCookie in respCookies) {
-              var contain = localList!
-                  .where((element) => element.name == respCookie.name);
-              if (contain.isNotEmpty) {
-                for (var containCookie in contain) {
-                  localList.remove(containCookie);
-                }
+          for (var respCookie in respCookies) {
+            List<CookieEntity> toRemove = [];
+            for (var element in localList!) {
+              if (element.name == respCookie.name) {
+                toRemove.add(element);
               }
-              final entity = CookieEntity();
-              entity.name = respCookie.name;
-              entity.value = respCookie.value;
-              localList.add(entity);
             }
-          } catch (exception) {
-            await globalAppController.loginOut();
-            extRunWithLogin(onLogin: () {});
+            localList.removeWhere((e) => toRemove.contains(e));
+            final entity = CookieEntity();
+            entity.name = respCookie.name;
+            entity.value = respCookie.value;
+            localList.add(entity);
           }
+          await CacheManager.save_web_local_cookie(jsonEncode(localList));
+        } catch (exception) {
+          extLog(msg: "_saveCookiesToLocal error ${exception}");
+          await globalAppController.loginOut();
+          extRunWithLogin(onLogin: () {});
         }
       }
     }
@@ -113,6 +113,7 @@ class WebWanCookieManager extends Interceptor {
             .join('; ');
       } catch (exception) {
         await globalAppController.loginOut();
+        extLog(msg: "_setCookieFromLocalStore error ${exception}");
         extRunWithLogin(onLogin: () {});
       }
     }
