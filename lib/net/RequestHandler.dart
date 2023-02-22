@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:wanandroid_flutter_re/base/net/BaseNetFetchHandler.dart';
+import 'package:wanandroid_flutter_re/net/interceptor/WanLoginExpiredInterceptor.dart';
 import 'package:wanandroid_flutter_re/net/interceptor/WebCookieInterceptor.dart';
 
 class RequestHandler extends BaseNetFetchHandler {
@@ -34,6 +35,7 @@ class RequestHandler extends BaseNetFetchHandler {
       //添加日志输出拦截器
       LogInterceptor(),
       cookieInterceptor,
+      WanLoginExpiredInterceptor(),
       //添加cookie管理工具
     ];
   }
