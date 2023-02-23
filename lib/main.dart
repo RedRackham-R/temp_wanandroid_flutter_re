@@ -111,6 +111,7 @@ _initMobilePlatform() async {
       Permission.storage,
     ],
     onSuccess: () {
+      extShowToast("权限请求成功！");
       _initAPIForApp(dir: appDocDir.path);
     },
     onFailed: () {
@@ -129,16 +130,16 @@ _initAPIForWeb() async {
 }
 
 _initAPIForApp({String dir = ""}) async {
-  final CookieManager cookieManager;
-  String cookiePath = "$dir/.wan_cookies/";
-  print("cookie path:$cookiePath");
-  final cookieJar = PersistCookieJar(storage: FileStorage(cookiePath));
-  cookieManager = CookieManager(cookieJar);
-  //cookie保存在内存 这里不需要，登录必须保存到本地
-  //cookieManager = CookieManager(CookieJar());
+  // final CookieManager cookieManager;
+  // String cookiePath = "$dir/.wan_cookies/";
+  // print("cookie path:$cookiePath");
+  // final cookieJar = PersistCookieJar(storage: FileStorage(cookiePath));
+  // cookieManager = CookieManager(cookieJar);
+  // //cookie保存在内存 这里不需要，登录必须保存到本地
+  // //cookieManager = CookieManager(CookieJar());
 
   requestHandler = RequestHandler(
     baseUrl: WanAPI.BASE_URL,
-    cookieInterceptor: cookieManager,
+    cookieInterceptor: WebCookieInterceptor(),
   );
 }
