@@ -5,7 +5,6 @@ import 'package:wanandroid_flutter_re/base/ext/CommonExt.dart';
 import 'package:wanandroid_flutter_re/global/Constant.dart';
 import 'package:wanandroid_flutter_re/global/GlobalAppController.dart';
 import 'package:wanandroid_flutter_re/global/ext/AppExt.dart';
-import 'package:wanandroid_flutter_re/global/ext/ThemeExt.dart';
 import 'package:wanandroid_flutter_re/logic/IndexController.dart';
 import 'package:wanandroid_flutter_re/main.dart';
 import 'package:wanandroid_flutter_re/routes/routes_config.dart';

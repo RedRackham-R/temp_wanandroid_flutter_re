@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
 _initializeApp() async {
   if (defaultTargetPlatform == TargetPlatform.iOS ||
       defaultTargetPlatform == TargetPlatform.android) {
-    await _initDesktopPlatform();
+    await _initMobilePlatform();
   } else if (defaultTargetPlatform == TargetPlatform.linux ||
       defaultTargetPlatform == TargetPlatform.macOS ||
       defaultTargetPlatform == TargetPlatform.windows) {
