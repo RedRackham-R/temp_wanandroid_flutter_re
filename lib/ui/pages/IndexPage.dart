@@ -191,6 +191,16 @@ class IndexPage extends GetView<IndexController> {
                 Get.toNamed(RoutesConfig.TOOLS);
               },
             ),
+            _creatDrawerItem(
+              "实用教程",
+              icon: const Icon(
+                Icons.book,
+                color: Colors.brown,
+              ),
+              onTap: () {
+                extShowToast("实用教程");
+              },
+            ),
             GetBuilder(
               init: globalAppController,
               id: Constant.GLOBAL_APP_SETTINGS_THEME_COLOR,
