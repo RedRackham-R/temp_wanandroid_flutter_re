@@ -9,16 +9,16 @@ enum ApiError {
   RECEIVE_TIMEOUT(1002, "接收超时，请稍后重试"),
 
   /// When the server response, but with a incorrect status, such as 404, 503...
-  RESPONSE(1003, "与服务通信异常，请稍后重试"),
+  BAD_RESPONSE(1003, "与服务通信异常，请稍后重试"),
 
   /// When the request is cancelled, dio will throw a error with this type.
   CANCEL(1004, "请求已取消"),
 
   /// Default error type, Some other Error. In this case, you can
   /// use the DioError.error if it is not null.
-  OTHER(1005, "请求失败，请稍后再试"),
+  OTHER(1005, "请求失败(2)，请稍后再试"),
 
-  UNKNOW(1006, "其他错误");
+  UNKNOW(1006, "请求失败(1)，请稍后再试");
 
   final int code;
   final String value;

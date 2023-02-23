@@ -29,8 +29,10 @@ class WebCookieInterceptor extends Interceptor {
     await _saveCookiesToLocal(response)
         .then((_) => handler.next(response))
         .catchError((e, stackTrace) {
-      var err = DioError(requestOptions: response.requestOptions, error: e);
-      err.stackTrace = stackTrace;
+      var err = DioError(
+          requestOptions: response.requestOptions,
+          error: e,
+          stackTrace: stackTrace);
       handler.reject(err, true);
     });
   }
@@ -42,10 +44,9 @@ class WebCookieInterceptor extends Interceptor {
           .then((_) => handler.next(err))
           .catchError((e, stackTrace) {
         var _err = DioError(
-          requestOptions: err.response!.requestOptions,
-          error: e,
-        );
-        _err.stackTrace = stackTrace;
+            requestOptions: err.response!.requestOptions,
+            error: e,
+            stackTrace: stackTrace);
         handler.next(_err);
       });
     } else {

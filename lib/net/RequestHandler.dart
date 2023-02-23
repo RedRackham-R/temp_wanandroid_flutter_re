@@ -44,8 +44,8 @@ class RequestHandler extends BaseNetFetchHandler {
   BaseOptions? setOptions() {
     BaseOptions options = BaseOptions();
     options.baseUrl = baseUrl;
-    options.connectTimeout = 5000;
-    options.receiveTimeout = 3000;
+    options.connectTimeout = const Duration(seconds: 5);
+    options.receiveTimeout = const Duration(seconds: 3);
     options.responseType = ResponseType.json;
     return options;
   }

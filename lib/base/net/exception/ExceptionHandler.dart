@@ -6,26 +6,24 @@ import 'AppException.dart';
 class ExceptionHandler {
   static AppException handleDioException(DioError e) {
     switch (e.type) {
-      case DioErrorType.connectTimeout:
-        {
-          return AppException(ApiError.CONNECT_TIMEOUT.value,
-              ApiError.CONNECT_TIMEOUT.code, e.message);
-        }
+      case DioErrorType.connectionTimeout:
+        return AppException(ApiError.CONNECT_TIMEOUT.value,
+            ApiError.CONNECT_TIMEOUT.code, e.message);
       case DioErrorType.sendTimeout:
         return AppException(ApiError.CONNECT_TIMEOUT.value,
             ApiError.CONNECT_TIMEOUT.code, e.message);
       case DioErrorType.receiveTimeout:
         return AppException(ApiError.RECEIVE_TIMEOUT.value,
             ApiError.RECEIVE_TIMEOUT.code, e.message);
-      case DioErrorType.response:
+      case DioErrorType.badResponse:
         return AppException(
-            ApiError.RESPONSE.value, ApiError.RESPONSE.code, e.message);
+            ApiError.BAD_RESPONSE.value, ApiError.BAD_RESPONSE.code, e.message);
       case DioErrorType.cancel:
         return AppException(
             ApiError.CANCEL.value, ApiError.CANCEL.code, e.message);
-      case DioErrorType.other:
+      case DioErrorType.unknown:
         return AppException(
-            ApiError.OTHER.value, ApiError.OTHER.code, e.message);
+            ApiError.UNKNOW.value, ApiError.UNKNOW.code, e.message);
       default:
         return AppException(
             ApiError.OTHER.value, ApiError.OTHER.code, e.message);
