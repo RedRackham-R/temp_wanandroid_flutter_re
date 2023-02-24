@@ -111,7 +111,6 @@ _initMobilePlatform() async {
       Permission.storage,
     ],
     onSuccess: () {
-      extShowToast("权限请求成功！");
       _initAPIForApp(dir: appDocDir.path);
     },
     onFailed: () {

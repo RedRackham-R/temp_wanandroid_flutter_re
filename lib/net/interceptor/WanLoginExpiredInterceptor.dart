@@ -10,10 +10,6 @@ class WanLoginExpiredInterceptor extends Interceptor {
     final errorCode = respDataMap["errorCode"];
     final errorMsg = respDataMap["errorMsg"];
     final data = respDataMap["data"];
-    extLog(
-        msg:
-            "WanLoginExpiredInterceptor 测试解析：${errorCode}  ${errorMsg}  ${data}");
-
     if (errorCode == -1001) {
       globalAppController.loginOut();
     }
