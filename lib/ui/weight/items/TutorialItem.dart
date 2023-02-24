@@ -30,7 +30,6 @@ class TutorialItem extends StatelessWidget {
             loadingBuilder: (BuildContext context,
                 Widget child,
                 ImageChunkEvent? loadingProgress,) {
-              extLog(msg: "loadingProgress ${loadingProgress}  ");
               if (loadingProgress == null) {
                 return child;
               } else {
