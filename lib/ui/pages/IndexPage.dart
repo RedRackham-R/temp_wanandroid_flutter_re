@@ -197,7 +197,7 @@ class IndexPage extends GetView<IndexController> {
                 color: Colors.brown,
               ),
               onTap: () {
-                extShowToast("实用教程");
+                Get.toNamed(RoutesConfig.TUTORIAL);
               },
             ),
             GetBuilder(
@@ -331,7 +331,7 @@ class IndexPage extends GetView<IndexController> {
                         fontSize: 16.sp,
                         color: extCurrentTheme()
                             .primaryTextTheme
-                            .bodyText1!
+                            .bodyLarge!
                             .color!,
                       ),
                     ),
@@ -376,7 +376,7 @@ class IndexPage extends GetView<IndexController> {
                                 fontSize: 12.sp,
                                 color: extCurrentTheme()
                                     .primaryTextTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .color!,
                               ),
                             ),
@@ -386,7 +386,7 @@ class IndexPage extends GetView<IndexController> {
                                 fontSize: 12.sp,
                                 color: extCurrentTheme()
                                     .primaryTextTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .color!,
                               ),
                             ),
@@ -399,7 +399,7 @@ class IndexPage extends GetView<IndexController> {
                                 fontSize: 12.sp,
                                 color: extCurrentTheme()
                                     .primaryTextTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .color!,
                               ),
                             ),
@@ -409,7 +409,7 @@ class IndexPage extends GetView<IndexController> {
                                 fontSize: 12.sp,
                                 color: extCurrentTheme()
                                     .primaryTextTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .color!,
                               ),
                             ),

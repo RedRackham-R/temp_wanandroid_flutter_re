@@ -209,7 +209,7 @@ class _ShareEditPageState extends State<ShareEditPage> {
                     style: TextStyle(
                       fontSize: 12.sp,
                       color:
-                          extCurrentTheme().primaryTextTheme.bodyText1!.color,
+                          extCurrentTheme().primaryTextTheme.bodyLarge!.color,
                     ),
                   ),
                 ),

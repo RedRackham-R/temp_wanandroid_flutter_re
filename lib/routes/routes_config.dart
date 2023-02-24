@@ -8,6 +8,7 @@ import 'package:wanandroid_flutter_re/routes/bindings/SettingsBinding.dart';
 import 'package:wanandroid_flutter_re/routes/bindings/ShareBinding.dart';
 import 'package:wanandroid_flutter_re/routes/bindings/ShareEditBinding.dart';
 import 'package:wanandroid_flutter_re/routes/bindings/ToolsBinding.dart';
+import 'package:wanandroid_flutter_re/routes/bindings/TutorialListBinding.dart';
 import 'package:wanandroid_flutter_re/routes/middleware/AuthLoginMiddleware.dart';
 import 'package:wanandroid_flutter_re/ui/pages/IndexPage.dart';
 import 'package:wanandroid_flutter_re/ui/pages/coin/CoinPage.dart';
@@ -20,8 +21,9 @@ import 'package:wanandroid_flutter_re/ui/pages/share/ShareEditPage.dart';
 import 'package:wanandroid_flutter_re/ui/pages/share/SharePage.dart';
 import 'package:wanandroid_flutter_re/ui/pages/splash/SplashPage.dart';
 import 'package:wanandroid_flutter_re/ui/pages/tools/ToolsPage.dart';
+import 'package:wanandroid_flutter_re/ui/pages/tutorial/TutorialListPage.dart';
 
- class RoutesConfig {
+class RoutesConfig {
   ///过渡
   static const SPLASH = "/splash";
 
@@ -52,6 +54,9 @@ import 'package:wanandroid_flutter_re/ui/pages/tools/ToolsPage.dart';
   ///工具箱
   static const TOOLS = "/tools";
 
+  ///教程
+  static const TUTORIAL = "/tutorial";
+
   ///系统设置
   static const SETTINGS = "/settings";
 
@@ -81,7 +86,6 @@ import 'package:wanandroid_flutter_re/ui/pages/tools/ToolsPage.dart';
       ],
       transition: Transition.rightToLeft,
     ),
-
     GetPage(
       name: COIN,
       page: () => CoinPage(),
@@ -104,7 +108,6 @@ import 'package:wanandroid_flutter_re/ui/pages/tools/ToolsPage.dart';
         AuthLoginMiddleware(),
       ],
     ),
-
     GetPage(
       name: COLLECT,
       page: () => CollectPage(),
@@ -113,7 +116,6 @@ import 'package:wanandroid_flutter_re/ui/pages/tools/ToolsPage.dart';
         AuthLoginMiddleware(),
       ],
     ),
-
     GetPage(
       name: SHARE,
       page: () => const SharePage(),
@@ -142,6 +144,14 @@ import 'package:wanandroid_flutter_re/ui/pages/tools/ToolsPage.dart';
       transition: Transition.rightToLeft,
       bindings: [
         ToolsBinding(),
+      ],
+    ),
+    GetPage(
+      name: TUTORIAL,
+      page: () => const TutorialListPage(),
+      transition: Transition.rightToLeft,
+      bindings: [
+        TutorialListBinding(),
       ],
     ),
     GetPage(

@@ -39,7 +39,7 @@ class SearchPage extends GetView<SearchController> {
             textAlignVertical: TextAlignVertical.center,
             style: TextStyle(
               fontSize: 16.sp,
-              color: extCurrentTheme().primaryTextTheme.bodyText1!.color,
+              color: extCurrentTheme().primaryTextTheme.bodyLarge!.color,
             ),
             textAlign: TextAlign.start,
             keyboardType: TextInputType.text,
@@ -70,7 +70,7 @@ class SearchPage extends GetView<SearchController> {
                 icon: const Icon(
                   Icons.close,
                 ),
-                color: extCurrentTheme().primaryTextTheme.bodyText1!.color,
+                color: extCurrentTheme().primaryTextTheme.bodyLarge!.color,
                 onPressed: () {
                   _editController.clear();
                 },

@@ -68,9 +68,9 @@ class _CoinRankList extends BaseListPage<CoinRankController> {
     }
     Color textColor;
     if (isCurIndex) {
-      textColor = extCurrentTheme().primaryTextTheme.bodyText1!.color!;
+      textColor = extCurrentTheme().primaryTextTheme.bodyLarge!.color!;
     } else {
-      textColor = extCurrentTheme().textTheme.bodyText1!.color!;
+      textColor = extCurrentTheme().textTheme.bodyLarge!.color!;
     }
     return Card(
       color: isCurIndex

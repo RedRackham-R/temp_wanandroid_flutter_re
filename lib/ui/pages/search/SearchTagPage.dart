@@ -173,7 +173,7 @@ class SearchTagPage extends GetView<SearchTagController> {
           style: TextStyle(
             color: extUseColorWithDarkMod(
               targetColor: ColorUtils.creatRadomColor(),
-              darkModColor: extCurrentTheme().textTheme.bodyText1!.color,
+              darkModColor: extCurrentTheme().textTheme.bodyLarge!.color,
             ),
           ),
         ),

@@ -110,4 +110,13 @@ class WanAPI {
   ///工具箱
   ///https://wanandroid.com/tools/list/json
   static String tools_list() => "tools/list/json";
+
+  ///教程列表
+  ///https://www.wanandroid.com/chapter/547/sublist/json
+  static String tutorial_list() => "chapter/547/sublist/json";
+
+  ///单个教程下所有文章
+  ///https://wanandroid.com/article/list/0/json?cid=549&order_type=1
+  static String tutorial_sub_list({required String cid}) =>
+      "article/list/0/json?cid=$cid&order_type=1";
 }

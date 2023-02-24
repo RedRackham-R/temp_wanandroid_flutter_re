@@ -34,7 +34,6 @@ class WanService {
   static Future<WanCommonResultEntity> fetchArticleTop() async {
     String path = WanAPI.article_top();
     final response = await requestHandler.getFetch(path: path);
-
     final result = _transResponse(response,
         (json) => jsonConvert.convertListNotNull<ArticleEntity>(json));
     return result;
@@ -54,7 +53,6 @@ class WanService {
     required int index,
   }) async {
     String path = WanAPI.user_article(index: index);
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convert<ArticleListEntity>(json));
@@ -64,7 +62,6 @@ class WanService {
   ///公众号tag GET
   static Future<WanCommonResultEntity> fetchWechatTag() async {
     String path = WanAPI.wechat_tag();
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convertListNotNull<TabTagEntity>(json));
@@ -77,7 +74,6 @@ class WanService {
     required int index,
   }) async {
     String path = WanAPI.wechat_article(cid: cid, index: index);
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convert<ArticleListEntity>(json));
@@ -87,7 +83,6 @@ class WanService {
   ///体系tag  GET
   static Future<WanCommonResultEntity> fetchSystemTag() async {
     String path = WanAPI.system_tag();
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convertListNotNull<TabTagEntity>(json));
@@ -97,7 +92,6 @@ class WanService {
   ///导航 GET
   static Future<WanCommonResultEntity> fetchNavi() async {
     String path = WanAPI.navi();
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convertListNotNull<NavEntity>(json));
@@ -107,7 +101,6 @@ class WanService {
   ///项目tag  GET
   static Future<WanCommonResultEntity> fetchProjectTag() async {
     String path = WanAPI.project_tag();
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convertListNotNull<TabTagEntity>(json));
@@ -120,7 +113,6 @@ class WanService {
     required int index,
   }) async {
     String path = WanAPI.project_article(index: index);
-
     final param = <String, dynamic>{};
     param["cid"] = cid;
     final response =
@@ -136,7 +128,6 @@ class WanService {
     required String password,
   }) async {
     String path = WanAPI.login();
-
     final params = <String, dynamic>{};
     params["username"] = username;
     params["password"] = password;
@@ -155,7 +146,6 @@ class WanService {
     required String password,
   }) async {
     String path = WanAPI.regist();
-
     final params = <String, dynamic>{};
     params["username"] = username;
     params["password"] = password;
@@ -172,7 +162,6 @@ class WanService {
   ///个人积分参数 GET
   static Future<WanCommonResultEntity> fetchUserCoinInfo() async {
     String path = WanAPI.user_coin_info();
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convert<UserCoinEntity>(json));
@@ -183,7 +172,6 @@ class WanService {
   static Future<WanCommonResultEntity> fetchCollectAeticle(
       {required int id}) async {
     String path = WanAPI.collect_article(id: id);
-
     final response = await requestHandler.postFetch(path: path);
     final result =
         _transResponse(response, (json) => null); //只要code返回0就是成功 不用处理转换了
@@ -194,7 +182,6 @@ class WanService {
   static Future<WanCommonResultEntity> fetchUncollectAeticle(
       {required int id}) async {
     String path = WanAPI.uncollect_article(id: id);
-
     final response = await requestHandler.postFetch(path: path);
     final result =
         _transResponse(response, (json) => null); //只要code返回0就是成功 不用处理转换了
@@ -205,7 +192,6 @@ class WanService {
   static Future<WanCommonResultEntity> fetchUserCoinList(
       {required int index}) async {
     String path = WanAPI.user_coin_list(index: index);
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convert<WanCommonListEntity>(json));
@@ -216,7 +202,6 @@ class WanService {
   static Future<WanCommonResultEntity> fetchCoinRankList(
       {required int index}) async {
     String path = WanAPI.coin_rank_list(index: index);
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convert<WanCommonListEntity>(json));
@@ -227,7 +212,6 @@ class WanService {
   static Future<WanCommonResultEntity> fetchCollectArticleList(
       {required int index}) async {
     String path = WanAPI.collect_list_article(index: index);
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convert<ArticleListEntity>(json));
@@ -237,7 +221,6 @@ class WanService {
   ///收藏网页列表
   static Future<WanCommonResultEntity> fetchCollectWebList() async {
     String path = WanAPI.collect_list_web();
-
     final response = await requestHandler.getFetch(path: path);
     final result = _transResponse(
         response, (json) => jsonConvert.convertList<CollectWebEntity>(json));
@@ -248,7 +231,6 @@ class WanService {
   static Future<WanCommonResultEntity> fetchDeleteCollectWeb(
       {required int id}) async {
     String path = WanAPI.delete_collect_web();
-
     final params = <String, dynamic>{};
     params["id"] = id;
     final response = await requestHandler.postFetch(
@@ -263,7 +245,6 @@ class WanService {
   ///搜索热词
   static Future<WanCommonResultEntity> fetchHotKeywords() async {
     String path = WanAPI.hot_keywords();
-
     final response = await requestHandler.getFetch(
       path: path,
     );
@@ -309,7 +290,6 @@ class WanService {
     required String link,
   }) async {
     String path = WanAPI.share_article();
-
     final params = <String, dynamic>{};
     params["title"] = title;
     params["link"] = link;
@@ -340,13 +320,38 @@ class WanService {
   ///工具箱列表
   static Future<WanCommonResultEntity> fetchToolsList() async {
     String path = WanAPI.tools_list();
-
     final response = await requestHandler.getFetch(
       path: path,
     );
 
     final result = _transResponse(
         response, (json) => jsonConvert.convertList<ToolEntity>(json));
+    return result;
+  }
+
+  ///教程列表
+  static Future<WanCommonResultEntity> fetchTutorialList() async {
+    String path = WanAPI.tutorial_list();
+    final response = await requestHandler.getFetch(
+      path: path,
+    );
+
+    final result = _transResponse(response,
+        (json) => jsonConvert.convertListNotNull<TabTagChildren>(json));
+    return result;
+  }
+
+  ///单个教程子列表
+  static Future<WanCommonResultEntity> fetchTutorialSubList({
+    required String cid,
+  }) async {
+    String path = WanAPI.tutorial_sub_list(cid: cid);
+    final response = await requestHandler.getFetch(
+      path: path,
+    );
+
+    final result = _transResponse(
+        response, (json) => jsonConvert.convert<ArticleListEntity>(json));
     return result;
   }
 

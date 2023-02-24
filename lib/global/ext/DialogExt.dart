@@ -74,7 +74,7 @@ extShowBottomMessageDialog(
               style: TextStyle(
                 fontSize: 12.sp,
                 color: extUseColorWithDarkMod(
-                  targetColor: extCurrentTheme().textTheme.bodyText1!.color!,
+                  targetColor: extCurrentTheme().textTheme.bodyLarge!.color!,
                 ),
               ),
             ),
