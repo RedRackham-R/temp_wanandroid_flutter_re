@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wanandroid_flutter_re/base/ext/CommonExt.dart';
 import 'package:wanandroid_flutter_re/entity/tab_tag_entity.dart';
 import 'package:wanandroid_flutter_re/global/ext/ThemeExt.dart';
 
@@ -23,27 +24,38 @@ class TutorialItem extends StatelessWidget {
         children: [
           Image.network(
             data.cover!,
-            loadingBuilder: (
-              BuildContext context,
-              Widget child,
-              ImageChunkEvent? loadingProgress,
-            ) {
+            height: 180.h,
+            width: 120.h,
+            fit: BoxFit.cover,
+            loadingBuilder: (BuildContext context,
+                Widget child,
+                ImageChunkEvent? loadingProgress,) {
+              extLog(msg: "loadingProgress ${loadingProgress}  ");
               if (loadingProgress == null) {
                 return child;
               } else {
-                return const Icon(
-                  Icons.image,
+                return Container(
+                  height: 180.h,
+                  width: 120.h,
                   color: Colors.grey,
+                  child: const Icon(
+                    Icons.image,
+                    color: Colors.white,
+                  ),
                 );
               }
             },
-            errorBuilder: (
-              BuildContext context,
-              Object error,
-              StackTrace? stackTrace,
-            ) {
-              return const Icon(
-                Icons.broken_image,
+            errorBuilder: (BuildContext context,
+                Object error,
+                StackTrace? stackTrace,) {
+              return Container(
+                height: 180.h,
+                width: 120.h,
+                color: Colors.grey,
+                child: const Icon(
+                  Icons.broken_image,
+                  color: Colors.white,
+                ),
               );
             },
           ),
