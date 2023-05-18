@@ -22,6 +22,7 @@ import 'package:wanandroid_flutter_re/ui/pages/share/SharePage.dart';
 import 'package:wanandroid_flutter_re/ui/pages/splash/SplashPage.dart';
 import 'package:wanandroid_flutter_re/ui/pages/tools/ToolsPage.dart';
 import 'package:wanandroid_flutter_re/ui/pages/tutorial/TutorialListPage.dart';
+import 'package:wanandroid_flutter_re/ui/pages/web/WebPage.dart';
 
 class RoutesConfig {
   ///过渡
@@ -59,6 +60,9 @@ class RoutesConfig {
 
   ///系统设置
   static const SETTINGS = "/settings";
+
+  ///web页面
+  static const WEB_ARTICLE = "/web_article";
 
   static final List<GetPage> getPages = [
     GetPage(name: SPLASH, page: () => const SplashPage()),
@@ -162,5 +166,11 @@ class RoutesConfig {
         SettingsBinding(),
       ],
     ),
+    GetPage(
+      name: WEB_ARTICLE,
+      page: () => WebPage(),
+      transition: Transition.rightToLeft,
+      bindings: const [],
+    )
   ];
 }

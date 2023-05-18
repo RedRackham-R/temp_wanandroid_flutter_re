@@ -12,6 +12,7 @@ import 'package:wanandroid_flutter_re/base/ext/CommonExt.dart';
 import 'package:wanandroid_flutter_re/global/GlobalAppController.dart';
 import 'package:wanandroid_flutter_re/logic/IndexController.dart';
 import 'package:wanandroid_flutter_re/main.dart';
+import 'package:wanandroid_flutter_re/routes/routes_config.dart';
 import 'package:wanandroid_flutter_re/ui/weight/items/ArticleItem.dart';
 import 'package:wanandroid_flutter_re/ui/weight/weight_controller/ListScrollControllerManager.dart';
 
@@ -232,7 +233,14 @@ abstract class BaseWanArticleListPage<C extends BaseWanArticleListController>
                 : controller.collect(
                     id: data.originId == null ? data.id! : data.originId!);
           },
-          onItemTap: (ArticleEntity data) {},
+          onItemTap: (ArticleEntity data) {
+            Get.toNamed(
+              RoutesConfig.WEB_ARTICLE,
+              parameters: {
+                "": "",
+              },
+            );
+          },
         );
       },
     );
